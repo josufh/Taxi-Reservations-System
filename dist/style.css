@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#title-h1 {
+    padding-left: 5%;
+    padding-top: 20px;
+}
+
+#main-contents {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+
+#nav-div {
+    width: 25%;
+    height: 100%;
+}
+
+#contents-div {
+    width: 90%;
+    height: fit-content;
+    padding: 50px;
+}
+
+.nav-button {
+    background-color: lightgray;
+    padding-left: 30px;
+    margin: 5px;
+    border-radius: 0px 20px 20px 0px;
+    height: 70px;
+    margin-right: 10px;
+    width: 75%;
+    font-size: small;
+    transition: 0.2s;
+    align-content: center;
+}
+
+.nav-button:hover {
+    background-color: rgb(197, 228, 255);
+    width: 90%;
+    font-size: larger;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#new-reservation-div {
+    display: flex;
+    flex-direction: row;
+}
+
+#new-reservation-left, #new-reservation-right {
+    display: flex;
+    flex-direction: row;
+}
+
+#new-reservation-right {
+    margin-left: 50px;
+}
+
+#left-left, #right-left {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#left-right, #right-right {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.labels, .inputs {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+#input-destination {
+    font-size: xx-small;
+}
+
+.new-reservation-button-cr {
+    background-color: lightgray;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.new-reservation-button-cr p {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.new-reservation-button-cr:hover {
+    font-weight: bold;
+    background-color: lightcoral;
+    width: 200px;
+}
+
+#yoyaku-kakutei-button:hover {
+    background-color: lightblue;
+}
+
+#error-window-div {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-25%);
+    background-color: white;
+    padding: 25px 50px;
+    border: 2px solid grey;
+    border-radius: 10px;
+}
+
+#new-reservation-div {
+    display: none;
+}
