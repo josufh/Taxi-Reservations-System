@@ -1,10 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { collection, addDoc, getFirestore, Timestamp } from "firebase/firestore";
+import { collection, addDoc, getFirestore, Timestamp, doc } from "firebase/firestore";
 import { firebaseConfig } from "./env.js"
 
-console.log(firebaseConfig)
-
-let t_reservation_window = false;
 let curr_open_div = ""
 
 const app = initializeApp(firebaseConfig);
@@ -14,7 +11,7 @@ const res_col_ref = collection(db, "reservations")
 
 window.onload = () => {
   document.getElementById("yoyaku-kakutei-button").onclick = confirmReservation;
-  document.getElementById("new-reservation-button").onclick = toggleReservationWindow;
+  document.getElementById("new-reservation-button").onclick = () => toggleWindow("new-reservation-div", "flex");
 };
 
 function confirmReservation() {
@@ -103,12 +100,10 @@ function getDate(date_timestamp) {
   return date_timestamp.toDate()
 }
 
-function toggleReservationWindow() {
-  t_reservation_window = !t_reservation_window
-  
-  if (t_reservation_window) {
-    document.getElementById("new-reservation-div").style.display = "flex"
-  } else {
-    document.getElementById("new-reservation-div").style.display = "none"
+function toggleWindow(divId, mode) {
+  if (curr_open_div != "") {
+    document.getElementById(curr_open_div).style.display = "none"
   }
+  document.getElementById(divId).style.display = mode
+  curr_open_div = divId
 }
