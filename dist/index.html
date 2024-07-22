@@ -31,9 +31,21 @@
                 </div>
             </div>
             <div id="show-reservations-div">
-                
+                <h3>予約照会</h3>
+                <table id="show-table">
+                    <tr>
+                        <th>ご乗車日</th>
+                        <th>お名前</th>
+                        <th>降車住所</th>
+                        <th>台数</th>
+                        <th>人数</th>
+                        <th>タクシー会社</th>
+                    </tr>
+                </table>
             </div>
             <div id="new-reservation-div">
+                <h3>新規予約</h3>
+                <div id="new-reservation-content">
                 <div id="new-reservation-left">
                     <div id="left-left">
                         <label class="labels" for="name">お名前</label>
@@ -41,7 +53,6 @@
                         <label class="labels" for="phone">ご連絡先</label>
                         <label class="labels" style="visibility: hidden;">ho</label>
                         <label class="labels" for="day">ご乗車日</label>
-                        <label class="labels" for="time">出発時間</label>
                         <label class="labels" for="destination">降車住所</label>
                         <label class="labels" style="visibility: hidden;">ho</label>                        
                         <label class="labels" style="visibility: hidden;">ho</label>
@@ -55,8 +66,7 @@
                         <input class="inputs" name="room" id="input-room" placeholder="1234" type="number">
                         <input class="inputs" name="phone" id="input-phone" placeholder="090-1234-5678">
                         <input class="inputs" style="visibility: hidden;">
-                        <input class="inputs" name="day" id="input-day" type="date">
-                        <input class="inputs" name="time" id="input-time" type="time">
+                        <input class="inputs" name="day" id="input-day" type="datetime-local">
                         <input class="inputs" name="destination" id="input-destination" placeholder="西新宿２－２－１" type="text">
                         <input class="inputs" style="visibility: hidden;">
                         <input class="inputs" style="visibility: hidden;">
@@ -91,6 +101,7 @@
                         <div class="new-reservation-button-cr" id="yoyaku-kakutei-button"><p>予約確定</p></div>
                         <div class="new-reservation-button-cr" id="new-reservaion-reset"><p>クリア</p></div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

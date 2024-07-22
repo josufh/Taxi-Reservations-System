@@ -6,9 +6,10 @@ Using VSCode with webpack and Google Firebase.
 
 Can do: (As of 24/07/22)
 - Make a reservation, save it to database.
+- Look what is in the database.
 
 ToDo:
-- Show reservations.
+- Show reservations details.
 - Make phone list.
 - Change reservations.
 - Cancel reservations.

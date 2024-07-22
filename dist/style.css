@@ -22,7 +22,7 @@ body {
 #contents-div {
     width: 90%;
     height: fit-content;
-    padding: 50px;
+    padding: 0px 50px;
 }
 
 .nav-button {
@@ -47,6 +47,11 @@ body {
 }
 
 #new-reservation-div {
+    display: none;
+    flex-direction: column;
+}
+
+#new-reservation-content {
     display: flex;
     flex-direction: row;
 }
@@ -123,6 +128,21 @@ body {
     border-radius: 10px;
 }
 
-#new-reservation-div {
-    display: none;
+#show-reservations-div {
+    display: block;
+}
+
+#show-table th {
+    font-weight: normal;
+    font-size: small;
+    background-color: white;
+}
+
+.show-table-row:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+.show-table-row td {
+    padding: 10px;
 }
