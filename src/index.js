@@ -9,10 +9,14 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const res_col_ref = collection(db, "reservations")
 
+let details_row = -1
+let details_id = ""
+let reservations = []
+
 window.onload = () => {
   getReservations()
-  document.getElementById("yoyaku-kakutei-button").onclick = confirmReservation;
-  document.getElementById("new-reservation-button").onclick = () => toggleWindow("new-reservation-div", "flex")
+  document.getElementById("new-reservation-confirm").onclick = confirmReservation;
+  document.getElementById("new-reservation-button").onclick = () => toggleWindow("new-reservation-div", "block")
   document.getElementById("show-reservations-button").onclick = () => {
     toggleWindow("show-reservations-div", "block")
     getReservations()
@@ -77,13 +81,16 @@ function confirmReservation() {
   }
 
   addDoc(res_col_ref, data)
-    .then(() => console.log("Reservation added successfully!"))
+    .then(() => {
+      console.log("Reservation added successfully!")
+      toggleWindow("show-reservations-div", "block")
+    })
 }
 
 function fireError(error_string) {
   document.getElementById("error-window-div").style.display = "flex"
   document.getElementById("error-message").innerHTML = error_string
-  setTimeout(clearError, 2000)
+  setTimeout(clearError, 5000)
 }
 
 function clearError() {
@@ -114,25 +121,26 @@ function getReservations() {
 }
 
 function writeTable(snapshot) {
-  let reservations = []
+  reservations = []
   snapshot.forEach(doc => {
     reservations.push({...doc.data(), id: doc.id, ref: doc.ref})
   })
   reservations.sort((a, b) => sortBy(a, b, "timestamp_date"))
 
   const table = document.getElementById("show-table")
-  table.innerHTML = "<tr><th>ご乗車日</th><th>お名前</th><th>降車住所</th><th>台数</th><th>人数</th><th>タクシー会社</th></tr>"
+  table.innerHTML = "<tr><th id='table-date'>乗車日時</th><th>名前</th><th id='table-dest'>降車住所</th><th class='table-small'>台数</th><th class='table-small'>人数</th><th id='table-comp'>タクシー会社</th></tr>"
   reservations.forEach(reservation => {
     let tr = document.createElement("tr")
     tr.id = reservation.id
     tr.className += "show-table-row"
+    tr.onclick = () => showDetails(reservation.id)
 
     let td_datetime = document.createElement("td")
     let date1 = getDate(reservation.timestamp_date).toLocaleString("jp-JA", { hour12: false })
     let date2 = date1.split(", ")
     let datel = date2[0].split("/")
     let dater = date2[1].split(":")
-    td_datetime. innerHTML = datel[0] + "/" + datel[1] + " " + dater[0] + ":" + dater[1]
+    td_datetime.innerHTML = datel[2] + "年" + datel[0] + "月" + datel[1] + "日　" + dater[0] + ":" + dater[1]
     tr.appendChild(td_datetime)
 
     let td_name = document.createElement("td")
@@ -164,4 +172,52 @@ function sortBy(a, b, constraint) {
   if (fa < fb) return -1
   if (fa > fb) return 1
   return 0
+}
+
+function showDetails(reservation_id) {
+  const table = document.getElementById("show-table")
+
+  if (details_row != -1) {
+    table.deleteRow(details_row)
+    if (reservation_id == details_id) {
+      details_id = ""
+      details_row = -1
+      return
+    }
+  }
+  details_id = reservation_id
+  const row = document.getElementById(reservation_id)
+  const new_row = table.insertRow(row.rowIndex+1)
+  details_row = new_row.rowIndex
+  const cell = new_row.insertCell(0)
+  cell.colSpan = 6
+  cell.innerHTML = document.getElementById("details-div").innerHTML
+  cell.className = "details"
+
+  let reservation = reservations.find(o => o.id == details_id)
+
+  node("details-name").innerHTML = reservation.guest_name
+  node("details-room").innerHTML = reservation.guest_room==""?"　":reservation.guest_room
+  node("details-phone").innerHTML = reservation.guest_phone==""?"　":reservation.guest_phone
+  let date1 = getDate(reservation.timestamp_date).toLocaleString("jp-JA", { hour12: false })
+  let date2 = date1.split(", ")
+  let datel = date2[0].split("/")
+  let dater = date2[1].split(":")
+  node("details-time").innerHTML = datel[2] + "年" + datel[0] + "月" + datel[1] + "日　" + dater[0] + ":" + dater[1]
+  node("details-dest").innerHTML = reservation.destination
+  node("details-type").innerHTML = reservation.car_type==""?"　":reservation.car_type
+  node("details-cars").innerHTML = reservation.car_number==""?"　":reservation.car_number
+  node("details-people").innerHTML = reservation.people_number==""?"　":reservation.people_number
+  node("details-bags").innerHTML = reservation.bags==""?"　":reservation.bags
+  node("details-estimate").innerHTML = reservation.estimate==""?"　":reservation.estimate
+  node("details-remarks").innerHTML = reservation.remarks==""?"　":reservation.remarks
+  node("details-comp").innerHTML = reservation.company==""?"　":reservation.company
+  node("details-senpo").innerHTML = reservation.senpo==""?"　":reservation.senpo
+  node("details-compphone").innerHTML = reservation.company_phone==""?"　":reservation.company_phone
+  node("details-tanto").innerHTML = reservation.tanto==""?"　":reservation.tanto
+  document.getElementById("print-button").href = "print.html?id="+reservation_id
+}
+
+function node(id) {
+  return document.getElementById(id)
 }
