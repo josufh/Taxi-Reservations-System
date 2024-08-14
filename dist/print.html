@@ -16,14 +16,26 @@
             }
 
             var queryParams = getQueryParams();
-            console.log(queryParams.id);
+            window.onload = () => {
+                document.getElementById("name").innerHTML = "　" + queryParams.name + "　"
+                document.getElementById("room").innerHTML = "　" + queryParams.room + "　"
+                document.getElementById("phone").innerHTML = "　" + queryParams.phone + "　"
+                document.getElementById("time").innerHTML = queryParams.time
+                document.getElementById("type").innerHTML = "　" + queryParams.type + "　"
+                document.getElementById("cars").innerHTML = "　" + queryParams.cars + "　"
+                document.getElementById("dest").innerHTML = "　" + queryParams.dest + "　"
+                document.getElementById("people").innerHTML = "　" + queryParams.people + "　"
+                document.getElementById("bags").innerHTML = "　" + queryParams.bags + "　"
+                document.getElementById("estimate").innerHTML = "　￥" + queryParams.estimate + "　"
+                document.getElementById("remarks").innerHTML = queryParams.remarks
+            }
         </script>
     </head>
     <body>
-        <div id="print-div">
-            <h3 style="margin-bottom: -10px;">KEIO PLAZA HOTEL TOKYO</h2>
+        <div id="print-div" style="width: 100%;">
+            <h3 style="margin-bottom: 10px;">KEIO PLAZA HOTEL TOKYO</h2>
             <p style="margin-bottom: -15px;">お車予約確認書</p>
-            <p style="margin-bottom: -10px;">Confirmation of Transport</p>
+            <p style="margin-bottom: 10px;">Confirmation of Transport</p>
             <p style="margin-bottom: -15px;">この度はお車のご依頼をいただきまして誠にありがとうございます。</p>
             <p style="margin-bottom: -5px;">下記のご予約内容にてお手配が完了いたしましたので、ご確認下さいませ。</p>
             <style>
@@ -51,12 +63,12 @@
                     <p style="border-style: none none solid solid;">　ご連絡先・Phone Number</p>
                 </div>
                 <div id="print-3" style="min-width: 200px;">
-                    <p style="border-style: solid none solid none;">アズマアキラ</p>
-                    <p style="border-style: none none solid none;">＃2910</p>
-                    <p style="border-style: none none solid none;">03-3344-0111　</p>
+                    <p id="name" style="border-style: solid none solid none;"></p>
+                    <p id="room" style="border-style: none none solid none;"></p>
+                    <p id="phone" style="border-style: none none solid none;"></p>
                 </div>
                 <div id="print-4">
-                    <p style="border-style: solid solid solid none;">様　</p>
+                    <p style="border-style: solid solid solid none;">　様　</p>
                     <p style="border-style: none solid solid none;">　</p>
                     <p style="border-style: none solid solid none;">　</p>
                 </div>
@@ -76,6 +88,11 @@
                     flex-direction: column;
                     align-items: center;
                 }
+
+                #hotel-use p {
+                    margin: 0;
+                    padding: 2px 2px;
+                }
             </style>
             <div id="print-5">
                 <div style="display: flex;">
@@ -85,7 +102,7 @@
                             <p>Boarding date and time</p>
                         </div>
                         <div class="print-center" style="border-style: none solid solid solid;">
-                            <p style="height: 50px;align-content: center;">2024年8月9日　9:50　AM</p>
+                            <p id="time" style="height: 50px;align-content: center;"></p>
                         </div>
                         <div style="display: flex;">
                             <div style="display: flex;flex-direction: column;width: 100%">
@@ -94,7 +111,7 @@
                                     <p>Designation</p>
                                 </div>
                                 <div style="border-style: none solid solid solid;display: flex;flex-direction: column;align-items: center;">
-                                    <p style="height: 50px;align-content: center;">指定なし</p>
+                                    <p id="type" style="height: 50px;align-content: center;"></p>
                                 </div>
                             </div>
                             <div style="display: flex;flex-direction: column;width: 100px">
@@ -103,7 +120,7 @@
                                     <p>Cars</p>
                                 </div>
                                 <div style="border-style: none solid solid none;display: flex;flex-direction: column;align-items: center;">
-                                    <p style="height: 50px;align-content: center;">　1　</p>
+                                    <p id="cars" style="height: 50px;align-content: center;"></p>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +131,7 @@
                             <p>Destination address</p>
                         </div>
                         <div style="display: flex;flex-direction: column;align-items: center;border-style: none solid solid none;">
-                            <p style="height: 50px;align-content: center;">上野方面</p>
+                            <p id="dest" style="height: 50px;align-content: center;"></p>
                         </div>
                         <div style="display: flex;">
                             <div style="width: 100px;">
@@ -123,7 +140,7 @@
                                     <p>Passengers</p>
                                 </div>
                                 <div style="display: flex;flex-direction: column;align-items: center;border-style: none solid solid none;">
-                                    <p style="height: 50px;align-content: center;">　1　</p>
+                                    <p id="people" style="height: 50px;align-content: center;"></p>
                                 </div>
                             </div>
                             <div style="width: 100px;">
@@ -132,7 +149,7 @@
                                     <p>Luggage</p>
                                 </div>
                                 <div style="display: flex;flex-direction: column;align-items: center;border-style: none solid solid none;">
-                                    <p style="height: 50px;align-content: center;">　0　</p>
+                                    <p id="bags" style="height: 50px;align-content: center;"></p>
                                 </div>
                             </div>
                             <div style="width: 100%;">
@@ -141,15 +158,15 @@
                                     <p>Estimate</p>
                                 </div>
                                 <div style="display: flex;flex-direction: column;align-items: center;border-style: none solid solid none;">
-                                    <p style="height: 50px;align-content: center;">　￥6.000　</p>
+                                    <p id="estimate" style="height: 50px;align-content: center;"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="border-style: none solid solid solid;">
+                <div style="border-style: none solid solid solid;padding-left: 5px;padding-right: 5px;">
                     <p>備考・Remarks</p>
-                    <p style="max-width: 696px;" id="print-remarks"></p>
+                    <p style="max-width: 696px;" id="remarks"></p>
                 </div>
             </div>
             <div style="font-size: x-small;max-width: 700px;">
@@ -158,9 +175,17 @@
                 <p style="margin-bottom: -15px;">For cancellations and changes, please contact us until the day before of the scheduled date.</p>
                 <p>Please note that cancellations on the scheduled day, a cancellation fee will be charged of the full planned route to the taxi company.</p>
             </div>
-            <hr style="width: 90%;">
-            <p>Hotel use only</p>
-    
+            <div style="display: none;">
+                <hr style="width: 90%;">
+                <p>Hotel use only</p>
+                <div id="hotel-use" style="width: 80%;background-color: aliceblue;">
+                    <p>タクシー会社：</p>
+                    <p>電話番号：</p>
+                    <p>先方担当者：</p>
+                    <p>自社担当者：</p>
+                    <p>受付日：</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>

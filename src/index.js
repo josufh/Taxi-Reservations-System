@@ -137,7 +137,8 @@ function writeTable(snapshot) {
 
     let td_datetime = document.createElement("td")
     let date1 = getDate(reservation.timestamp_date).toLocaleString("jp-JA", { hour12: false })
-    let date2 = date1.split(", ")
+    let date3 = date1.replace(",", "")
+    let date2 = date3.split(" ")
     let datel = date2[0].split("/")
     let dater = date2[1].split(":")
     td_datetime.innerHTML = datel[2] + "年" + datel[0] + "月" + datel[1] + "日　" + dater[0] + ":" + dater[1]
@@ -215,7 +216,11 @@ function showDetails(reservation_id) {
   node("details-senpo").innerHTML = reservation.senpo==""?"　":reservation.senpo
   node("details-compphone").innerHTML = reservation.company_phone==""?"　":reservation.company_phone
   node("details-tanto").innerHTML = reservation.tanto==""?"　":reservation.tanto
-  document.getElementById("print-button").href = "print.html?id="+reservation_id
+  document.getElementById("print-button").href = "print.html?name="+reservation.guest_name+"&room="+reservation.guest_room+"&phone="+reservation.guest_phone
+      +"&time="+datel[2] + "年" + datel[0] + "月" + datel[1] + "日　" + dater[0] + ":" + dater[1]+"&dest="+reservation.destination
+      +"&type="+reservation.car_type+"&cars="+reservation.car_number+"&people="+reservation.people_number+"&bags="+reservation.bags
+      +"&estimate="+reservation.estimate+"&remarks="+reservation.remarks+"&comp="+reservation.company+"&senpo="+reservation.senpo
+      +"&compphone="+reservation.company_phone+"&tanto="+reservation.tanto
 }
 
 function node(id) {
