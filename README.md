@@ -9,8 +9,6 @@ Can do: (As of 24/07/22)
 - Look what is in the database.
 
 ToDo:
-- Show reservations details.
-- Make phone list.
 - Change reservations.
 - Cancel reservations.
 - Print reservations.

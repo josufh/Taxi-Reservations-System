@@ -138,6 +138,7 @@ function writeTable(snapshot) {
     let td_datetime = document.createElement("td")
     let date1 = getDate(reservation.timestamp_date).toLocaleString("jp-JA", { hour12: false })
     let date3 = date1.replace(",", "")
+    console.log(date3 + " why aren't you working")
     let date2 = date3.split(" ")
     let datel = date2[0].split("/")
     let dater = date2[1].split(":")
